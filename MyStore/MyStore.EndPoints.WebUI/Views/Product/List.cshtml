@@ -1,0 +1,15 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+@foreach (var item in Model)
+{
+    <div>
+        <img src="@item.Image"  />
+        @item.Name
+        <br />
+        @item.Price.ToString("c")
+    </div>
+}

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyStore.Core.Contracts.Products;
+using MyStore.Infrastructures.Dal.Products;
 
 namespace MyStore.EndPoints.WebUI
 {
@@ -17,6 +19,7 @@ namespace MyStore.EndPoints.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<IProductRepository, FakeProductRepository>();
 
         }
 
@@ -27,9 +30,8 @@ namespace MyStore.EndPoints.WebUI
             app.UseStatusCodePages();
             app.UseStaticFiles();
 
-            //app.UseMvc();     // Replace UseMvc or UseSignalR with UseEndpoints.
-            app.UseRouting();
-            //app.UseEndpoints();
+            //app.UseMvc();     
+            // Replace UseMvc or UseSignalR with UseEndpoints.
 
             /* endpoint routing in core 3:
                 1. determine route => UseRouting()
@@ -44,15 +46,19 @@ namespace MyStore.EndPoints.WebUI
             //    app.UseDeveloperExceptionPage();
             //}
 
-            //app.UseRouting();
+            app.UseRouting();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Default",
+                    pattern: "{controller=product}/{action=list}/{id?}"
+                );
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
+            });
         }
     }
 }
