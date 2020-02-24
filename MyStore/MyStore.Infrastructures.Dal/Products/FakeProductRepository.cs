@@ -1,7 +1,6 @@
 ﻿using MyStore.Core.Contracts.Products;
 using MyStore.Core.Domain.Categories;
 using MyStore.Core.Domain.Products;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
