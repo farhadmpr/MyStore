@@ -60,9 +60,21 @@ namespace MyStore.EndPoints.WebUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "ProductPaging",
+                    pattern: "Page{pageNumber:int}",
+                    defaults: new
+                    {
+                        controller = "Product",
+                        action = "List",                        
+                    }
+                );
+
+                endpoints.MapControllerRoute(
                     name: "Default",
                     pattern: "{controller=product}/{action=list}/{id?}"
                 );
+
+
                 //endpoints.MapGet("/", async context =>
                 //{
                 //    await context.Response.WriteAsync("Hello World!");

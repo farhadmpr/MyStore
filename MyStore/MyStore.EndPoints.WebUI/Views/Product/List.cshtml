@@ -60,9 +60,10 @@
     }
 </div>
 
-<div>
+<div class="btn-group pull-right m-1">
     @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
     {
-        <a asp-action="List" asp-route-pageNumber="@i">@i</a>
+        var className = i == Model.PagingInfo.CurrentPage ? "btn-primary" : "btn-secondary";
+        <a class="btn @className" asp-action="List" asp-route-pageNumber="@i">@i</a> 
     }
 </div>
