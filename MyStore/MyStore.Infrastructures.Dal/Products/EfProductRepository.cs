@@ -16,9 +16,14 @@ namespace MyStore.Infrastructures.Dal.Products
         {
             _ctx = mySotreContext;
         }
-        public List<Product> GetProducts()
+        public List<Product> GetProducts(int pageSize = 4, int pageNumber = 1)
         {
-            return _ctx.Products.Include(c=>c.Category).ToList();
+            return _ctx.Products.Include(c=>c.Category).Skip(pageSize * (pageNumber-1)).Take(pageSize).ToList();
+        }
+
+        public int TotalCount()
+        {
+            return _ctx.Products.Count();
         }
     }
 }

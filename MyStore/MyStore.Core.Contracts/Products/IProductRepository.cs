@@ -7,7 +7,8 @@ namespace MyStore.Core.Contracts.Products
 {
     public interface IProductRepository
     {
-        List<Product> GetProducts();
+        int TotalCount();
+        List<Product> GetProducts(int pageSize = 4, int pageNumber = 1);
 
     }
 }

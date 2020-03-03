@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model ProductListViewModel
 @{
     ViewData["Title"] = "List";
 }
@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Products)
     {
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
@@ -58,6 +58,11 @@
             </div>
         </div>
     }
+</div>
 
-
+<div>
+    @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+    {
+        <a asp-action="List" asp-route-pageNumber="@i">@i</a>
+    }
 </div>

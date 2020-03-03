@@ -1,9 +1,10 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyStore.Core.Contracts.Products;
+using MyStore.EndPoints.WebUI.Models.Products;
 
 namespace MyStore.EndPoints.WebUI.Controllers
 {
@@ -16,11 +17,20 @@ namespace MyStore.EndPoints.WebUI.Controllers
             _productRepository = productRepository;
         }
 
-        public IActionResult List()
+        public IActionResult List(int pageNumber = 1)
         {
-            var products = _productRepository.GetProducts();
+            var model = new ProductListViewModel
+            {
+                Products = _productRepository.GetProducts(2, pageNumber),
+                PagingInfo = new Models.Commons.PagingInfo
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPages = 2,
+                    TotalItems = _productRepository.TotalCount(),
+                }
+            };
 
-            return View(products);
+            return View(model);
         }
     }
 }
