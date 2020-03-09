@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyStore.Core.Contracts.Categories;
 using MyStore.Core.Contracts.Products;
+using MyStore.Infrastructures.Dal.Categories;
 using MyStore.Infrastructures.Dal.Commons;
 using MyStore.Infrastructures.Dal.Products;
 
@@ -29,6 +31,7 @@ namespace MyStore.EndPoints.WebUI
             services.AddMvc();
             services.AddDbContext<MyStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("storeDb")));
             services.AddScoped<IProductRepository, EfProductRepository>();
+            services.AddScoped<ICategoryRepository, EfCategoryRepository>();
 
         }
 
