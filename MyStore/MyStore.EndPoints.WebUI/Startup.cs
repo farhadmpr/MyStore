@@ -63,13 +63,25 @@ namespace MyStore.EndPoints.WebUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "CategoryWithPage",
+                    pattern: "{category}/Page{pageNumber:int}",
+                    defaults: new { controller = "Product", action = "List" }
+                );
+
+                endpoints.MapControllerRoute(
                     name: "ProductPaging",
                     pattern: "Page{pageNumber:int}",
                     defaults: new
                     {
                         controller = "Product",
-                        action = "List",                        
+                        action = "List",
                     }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "Category",
+                    pattern: "{category}",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 }
                 );
 
                 endpoints.MapControllerRoute(

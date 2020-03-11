@@ -16,14 +16,15 @@ namespace MyStore.Infrastructures.Dal.Products
         {
             _ctx = mySotreContext;
         }
-        public List<Product> GetProducts(int pageSize = 4, int pageNumber = 1)
+        public List<Product> GetProducts(string category, int pageSize = 4, int pageNumber = 1)
         {
-            return _ctx.Products.Include(c=>c.Category).Skip(pageSize * (pageNumber-1)).Take(pageSize).ToList();
+            return _ctx.Products.Where(c => string.IsNullOrWhiteSpace(category) || c.Category.CategoryName == category)
+                .Include(c => c.Category).Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
         }
 
-        public int TotalCount()
+        public int TotalCount(string category)
         {
-            return _ctx.Products.Count();
+            return _ctx.Products.Count(c => string.IsNullOrWhiteSpace(category) || c.Category.CategoryName == category);
         }
     }
 }

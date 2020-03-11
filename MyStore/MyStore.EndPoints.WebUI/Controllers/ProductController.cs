@@ -17,17 +17,18 @@ namespace MyStore.EndPoints.WebUI.Controllers
             _productRepository = productRepository;
         }
 
-        public IActionResult List(int pageNumber = 1)
+        public IActionResult List(string category, int pageNumber = 1)
         {
             var model = new ProductListViewModel
             {
-                Products = _productRepository.GetProducts(2, pageNumber),
+                Products = _productRepository.GetProducts(category, 2, pageNumber),
                 PagingInfo = new Models.Commons.PagingInfo
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPages = 2,
-                    TotalItems = _productRepository.TotalCount(),
-                }
+                    TotalItems = _productRepository.TotalCount(category),
+                },
+                CurrentCategory = category
             };
 
             return View(model);

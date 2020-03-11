@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyStore.Infrastructures.Dal.Products
 {
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductRepository //: IProductRepository
     {
         private static List<Product> _products = new List<Product>
         {
