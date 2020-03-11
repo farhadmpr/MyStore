@@ -19,6 +19,8 @@ namespace MyStore.EndPoints.WebUI.Controllers
 
         public IActionResult List(string category, int pageNumber = 1)
         {
+            category = category?.Replace("-", " ");
+
             var model = new ProductListViewModel
             {
                 Products = _productRepository.GetProducts(category, 2, pageNumber),

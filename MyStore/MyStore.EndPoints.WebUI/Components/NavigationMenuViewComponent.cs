@@ -25,7 +25,7 @@ namespace MyStore.EndPoints.WebUI.Components
 
             if (RouteData?.Values.ContainsKey("category") == true)
             {
-                model.CurrentCategory = RouteData?.Values["category"].ToString();
+                model.CurrentCategory = RouteData?.Values["category"].ToString().Replace("-", " ");
             }
 
             return View(model);

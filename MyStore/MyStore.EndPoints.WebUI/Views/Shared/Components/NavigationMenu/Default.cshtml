@@ -6,8 +6,11 @@
         var className = item.CategoryName == Model.CurrentCategory ? "text-danger" : "";
         <a asp-action="List" 
            asp-controller="Product" 
-           asp-route-category="@item.CategoryName" 
+           asp-route-category="@item.CategoryName.Trim().Replace(" ", "-")"
            asp-route-pageNumber="1" 
-           class="list-group-item @className">@item.CategoryName</a>
+           class="list-group-item 
+           @(Model.CurrentCategory == item.CategoryName ? "list-group-item-danger" : "")">
+            @item.CategoryName
+        </a>
     }
 </div>
