@@ -1,4 +1,10 @@
-﻿using MyStore.Core.Domain.Products;
+﻿/*
+ * Entity Model:
+ *  Enemic Model: only have property
+ *  Rich Model: have property and methods
+ */
+
+using MyStore.Core.Domain.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
