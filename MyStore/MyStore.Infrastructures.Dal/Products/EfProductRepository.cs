@@ -16,6 +16,12 @@ namespace MyStore.Infrastructures.Dal.Products
         {
             _ctx = mySotreContext;
         }
+
+        public Product Find(int productId)
+        {
+            return _ctx.Products.Find(productId);
+        }
+
         public List<Product> GetProducts(string category, int pageSize = 4, int pageNumber = 1)
         {
             return _ctx.Products.Where(c => string.IsNullOrWhiteSpace(category) || c.Category.CategoryName == category)
