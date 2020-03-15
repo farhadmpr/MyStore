@@ -29,6 +29,9 @@ namespace MyStore.EndPoints.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
+
             services.AddDbContext<MyStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("storeDb")));
             services.AddScoped<IProductRepository, EfProductRepository>();
             services.AddScoped<ICategoryRepository, EfCategoryRepository>();
@@ -41,6 +44,7 @@ namespace MyStore.EndPoints.WebUI
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
 
             //app.UseMvc();     
             // Replace UseMvc or UseSignalR with UseEndpoints.
