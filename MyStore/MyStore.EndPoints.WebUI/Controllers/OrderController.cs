@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MyStore.Core.Domain.Orders;
 
 namespace MyStore.EndPoints.WebUI.Controllers
 {
