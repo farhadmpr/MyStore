@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyStore.Core.Domain.Categories;
+using MyStore.Core.Domain.Orders;
 using MyStore.Core.Domain.Products;
 using MyStore.Infrastructures.Dal.Categories;
 using MyStore.Infrastructures.Dal.Products;
@@ -17,6 +18,7 @@ namespace MyStore.Infrastructures.Dal.Commons
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

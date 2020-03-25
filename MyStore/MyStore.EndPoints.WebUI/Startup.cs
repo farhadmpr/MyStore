@@ -15,6 +15,8 @@ using MyStore.Infrastructures.Dal.Categories;
 using MyStore.Infrastructures.Dal.Commons;
 using MyStore.Infrastructures.Dal.Products;
 using MyStore.EndPoints.WebUI.Models.Carts;
+using MyStore.Core.Contracts.Orders;
+using MyStore.Infrastructures.Dal.Orders;
 
 namespace MyStore.EndPoints.WebUI
 {
@@ -36,6 +38,7 @@ namespace MyStore.EndPoints.WebUI
             services.AddDbContext<MyStoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("storeDb")));
             services.AddScoped<IProductRepository, EfProductRepository>();
             services.AddScoped<ICategoryRepository, EfCategoryRepository>();
+            services.AddScoped<IOrderRepository, EfOrderRepository>();
 
             services.AddScoped(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
