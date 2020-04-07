@@ -36,8 +36,8 @@ namespace MyStore.EndPoints.WebUI.Controllers
             {
                 order.Lines = _cart.Lines.ToArray();
                 _orderRepository.SaveOrder(order);
-                //TempData["OrderId"] = order.OrderId;
-                //TempData["Price"] = order.Lines.Sum(c => c.Product.Price * c.Quantity);
+                TempData["OrderId"] = order.OrderId;
+                TempData["Price"] = order.Lines.Sum(c => c.Product.Price * c.Quantity);
                 return RedirectToAction(nameof(Completed));
             }
             else
