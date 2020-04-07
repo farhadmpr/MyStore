@@ -1,4 +1,5 @@
-﻿using MyStore.Core.Contracts.Orders;
+﻿using Microsoft.EntityFrameworkCore;
+using MyStore.Core.Contracts.Orders;
 using MyStore.Core.Domain.Orders;
 using MyStore.Infrastructures.Dal.Commons;
 using System;
@@ -16,6 +17,12 @@ namespace MyStore.Infrastructures.Dal.Orders
         {
             _ctx = myStoreContext;
         }
+
+        public Order Find(int id)
+        {
+            return _ctx.Orders.Include(c => c.Lines).ThenInclude(c=>c.Product).FirstOrDefault(c => c.OrderId == id);
+        }
+
         public void SaveOrder(Order order)
         {
             /*

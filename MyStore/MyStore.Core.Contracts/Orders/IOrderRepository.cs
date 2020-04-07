@@ -8,5 +8,6 @@ namespace MyStore.Core.Contracts.Orders
     public interface IOrderRepository
     {
         void SaveOrder(Order order);
+        Order Find(int id);
     }
 }

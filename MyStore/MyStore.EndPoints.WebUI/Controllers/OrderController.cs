@@ -36,9 +36,9 @@ namespace MyStore.EndPoints.WebUI.Controllers
             {
                 order.Lines = _cart.Lines.ToArray();
                 _orderRepository.SaveOrder(order);
-                TempData["OrderId"] = order.OrderId;
-                TempData["Price"] = order.Lines.Sum(c => c.Product.Price * c.Quantity);
-                return RedirectToAction(nameof(Completed));
+                //TempData["OrderId"] = order.OrderId;
+                //TempData["Price"] = order.Lines.Sum(c => c.Product.Price * c.Quantity);
+                return RedirectToAction(nameof(Completed), new { Id = order.OrderId });
             }
             else
             {
@@ -46,9 +46,16 @@ namespace MyStore.EndPoints.WebUI.Controllers
             }
         }
 
-        public IActionResult Completed()
+        public IActionResult Completed(int id)
         {
-            return View();
+            var order = _orderRepository.Find(id);
+
+            if(order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
 
 
