@@ -38,5 +38,25 @@ namespace MyStore.Infrastructures.Dal.Orders
             }
             _ctx.SaveChanges();
         }
+
+        public void SetPaymentDone(string factorNumber)
+        {
+            var order = _ctx.Orders.Find(int.Parse(factorNumber));
+            if (order != null)
+            {
+                order.PaymentDate = DateTime.Now;
+                _ctx.SaveChanges();
+            }
+        }
+
+        public void SetTransactionId(int orderId, string token)
+        {
+            var order = _ctx.Orders.Find(orderId);
+            if(order != null)
+            {
+                order.PaymentId = token;
+                _ctx.SaveChanges();
+            }
+        }
     }
 }

@@ -17,6 +17,8 @@ using MyStore.Infrastructures.Dal.Products;
 using MyStore.EndPoints.WebUI.Models.Carts;
 using MyStore.Core.Contracts.Orders;
 using MyStore.Infrastructures.Dal.Orders;
+using MyStore.Core.Contracts.Payments;
+using MyStore.Services.ApplicationServices.Payments;
 
 namespace MyStore.EndPoints.WebUI
 {
@@ -39,6 +41,8 @@ namespace MyStore.EndPoints.WebUI
             services.AddScoped<IProductRepository, EfProductRepository>();
             services.AddScoped<ICategoryRepository, EfCategoryRepository>();
             services.AddScoped<IOrderRepository, EfOrderRepository>();
+            services.AddScoped<IPayment, PayIrPayment>();
+
 
             services.AddScoped(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

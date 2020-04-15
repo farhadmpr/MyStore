@@ -39,7 +39,16 @@ namespace MyStore.Services.ApplicationServices.Payments
 
         public VerifyPaymentResult Verify(string transId)
         {
-            throw new NotImplementedException();
+            HttpClient client = new HttpClient();
+            Dictionary<string, string> postValues = new Dictionary<string, string>();
+            postValues.Add("api", configuration["PayIr:ApiKey"]);
+            postValues.Add("token", transId);
+
+            var content = new FormUrlEncodedContent(postValues);
+            var response = client.PostAsync("https://pay.ir/pg/verify", content).Result;
+            var responseString = response.Content.ReadAsStringAsync().Result;
+
+            return JsonConvert.DeserializeObject<VerifyPaymentResult>(responseString);
         }
     }
 }
