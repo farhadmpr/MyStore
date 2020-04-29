@@ -1,10 +1,12 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyStore.Core.Contracts.Products;
 using MyStore.EndPoints.WebUI.Models.Products;
+using Newtonsoft.Json;
 
 namespace MyStore.EndPoints.WebUI.Controllers
 {

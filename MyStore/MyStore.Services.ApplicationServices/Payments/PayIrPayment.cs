@@ -44,11 +44,18 @@ namespace MyStore.Services.ApplicationServices.Payments
             postValues.Add("api", configuration["PayIr:ApiKey"]);
             postValues.Add("token", transId);
 
-            var content = new FormUrlEncodedContent(postValues);
-            var response = client.PostAsync("https://pay.ir/pg/verify", content).Result;
-            var responseString = response.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var content = new FormUrlEncodedContent(postValues);
+                var response = client.PostAsync(configuration["PayIr:PaymentVerify"], content).Result;
+                var responseString = response.Content.ReadAsStringAsync().Result;
 
-            return JsonConvert.DeserializeObject<VerifyPaymentResult>(responseString);
+                return JsonConvert.DeserializeObject<VerifyPaymentResult>(responseString);
+            }
+            catch (Exception)
+            {
+                return new VerifyPaymentResult();
+            }
         }
     }
 }
